@@ -4,11 +4,12 @@ export async function GET(req: Request, res: Response) {
   return Response.json(notes);
 }
 
-export async function POST(req: Request, res: any) {
+export async function POST(req: Request, res: Response) {
   const note = await req.json();
-  note.date = new Date().toISOString().split("T")[0];
+  if (!note.Title || !note.Text) return;
+  note.Date = new Date().toISOString().split("T")[0];
 
   notes.push(note);
-
+  console.log(note);
   return Response.json(note);
 }

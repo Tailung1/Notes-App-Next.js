@@ -1,33 +1,33 @@
-import Notes from "../../../components/Notes";
+import NoteForm from "@/components/Notes";
 
-interface note {
-  title: string;
-  text: string;
-  date: string;
+interface Note {
+  Title: string;
+  Text: string;
+  Date: string;
 }
 
-export default async function Home() {
+const NotesPage = async () => {
   const response = await fetch("http://localhost:3000/api/notes");
-
-  if (!response.ok) {
-    console.log("failedd");
-    return;
-  }
-  const data = await response.json();
-  console.log(data);
+  const notes: Note[] = await response.json();
 
   return (
     <div>
-      <Notes />
-      <div className="flex flex-col gap-2">
-        {data.map((note: note) => (
-          <div className="bg-amber-400" key={Math.random() * 3}>
-            <h1>{note.title}</h1>
-            <h2>{note.text}</h2>
-            <h3 className='italic'>{note.date}</h3>
+      <NoteForm />
+      <h2 className='mb-2'>Notes</h2>
+      <div className='flex flex-wrap gap-2 '>
+        {notes.map((note) => (
+          <div
+            className='bg-amber-400 p-3 rounded-md'
+            key={Math.random() * 2}
+          >
+            <h1>{note.Title}</h1>
+            <h2 className='italic'>{note.Text}</h2>
+            <h3 className='italic'>{note.Date}</h3>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default NotesPage;
