@@ -1,10 +1,11 @@
-import NoteForm from "@/components/Notes";
-import { Button } from "antd";
+import { NoteForm } from "@/components/Notes";
+import { Note } from "@/components/Notes";
 
 interface Note {
   Title: string;
   Text: string;
   Date: string;
+  id:string
 }
 
 const NotesPage = async () => {
@@ -16,17 +17,12 @@ const NotesPage = async () => {
       <NoteForm />
       <h2 className='mb-2'>Notes</h2>
       <div className='flex flex-wrap gap-2 '>
-        {notes.map((note) => (
+        {notes.map((note: Note) => (
           <div
             className='bg-amber-400 p-3 rounded-md'
             key={Math.random() * 2}
           >
-            <h1>{note.Title}</h1>
-            <h2 className='italic'>{note.Text}</h2>
-            <h3 className='italic'>{note.Date}</h3>
-            <Button className='mt-2' danger>
-              Delete
-            </Button>
+            <Note note={note} />
           </div>
         ))}
       </div>

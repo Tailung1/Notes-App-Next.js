@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 const NoteForm = () => {
   const [form] = Form.useForm();
   const router = useRouter();
+
   const handleSubmit = async (values: {
     Title: string;
     Text: string;
     Date: string;
+    id: string;
   }) => {
     const sendData = await fetch("http://localhost:3000/api/notes", {
       method: "POST",
@@ -22,8 +24,6 @@ const NoteForm = () => {
     }
     router.refresh();
     form.resetFields();
-
-    console.log("New note added successfully");
   };
 
   return (
@@ -43,4 +43,37 @@ const NoteForm = () => {
   );
 };
 
-export default NoteForm;
+interface noteTypes {
+  Title: string;
+  Text: string;
+  Date: string;
+  id: string;
+}
+const Note = ({ note }: { note: noteTypes }) => {
+  const router = useRouter();
+  const handleDelete = async (id: string) => {
+   const deleteNote= await fetch(`http://localhost:3000/api/notes/${id}`, {
+      method: "DELETE",
+    });
+    const response=await deleteNote.json()
+    console.log(response.message)
+    router.refresh()
+  };
+  return (
+    <div>
+      <h1>{note.Title}</h1>
+      <h2 className='italic'>{note.Text}</h2>
+      <h3 className='italic'>{note.Date}</h3>
+      <Button
+        onClick={() => handleDelete(note.id)}
+        htmlType='submit'
+        className='mt-2'
+        danger
+      >
+        Delete
+      </Button>
+    </div>
+  );
+};
+
+export { NoteForm, Note };

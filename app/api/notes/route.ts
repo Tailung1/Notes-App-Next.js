@@ -8,6 +8,7 @@ export async function POST(req: Request, res: Response) {
   const note = await req.json();
   if (!note.Title || !note.Text) return;
   note.Date = new Date().toISOString().split("T")[0];
+  note.id = Math.random()
 
   notes.push(note);
   console.log(note);
