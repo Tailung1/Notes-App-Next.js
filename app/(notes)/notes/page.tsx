@@ -1,4 +1,5 @@
 import NoteForm from "@/components/Notes";
+import { Button } from "antd";
 
 interface Note {
   Title: string;
@@ -23,6 +24,9 @@ const NotesPage = async () => {
             <h1>{note.Title}</h1>
             <h2 className='italic'>{note.Text}</h2>
             <h3 className='italic'>{note.Date}</h3>
+            <Button className='mt-2' danger>
+              Delete
+            </Button>
           </div>
         ))}
       </div>
