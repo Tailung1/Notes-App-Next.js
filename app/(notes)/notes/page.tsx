@@ -5,7 +5,7 @@ interface Note {
   Title: string;
   Text: string;
   Date: string;
-  id:string
+  id: string;
 }
 
 const NotesPage = async () => {
