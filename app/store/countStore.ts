@@ -2,6 +2,16 @@ import { create } from "zustand";
 
 const useCountStore = create((set) => ({
   count: 0,
+  todoText: "",
+  todos: ["dance", "play"],
+  handleTextChange: (text: string) =>
+    set((state: { todoText: string }) => ({
+      todoText: text,
+    })),
+  handleTodoAdd: () =>
+    set((state: { todos: []; todoText: string }) => ({
+      todos: [...state.todos, state.todoText],
+    })),
   Increment: () =>
     set((state: { count: number }) => ({
       count: (state.count += 1),
