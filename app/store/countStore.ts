@@ -9,7 +9,6 @@ const useCountStore = create((set) => ({
       todoText: text,
     })),
   handleTodoAdd: () =>
-  
     set((state: { todos: []; todoText: string }) => ({
       todos: [...state.todos, state.todoText],
     })),
