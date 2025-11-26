@@ -1,12 +1,9 @@
 "use client";
 import "../globals.css";
 import useCountStore from "../store/countStore";
-import { Metadata } from "next";
 
-export const metadata:Metadata={
-    title:"Notes",
-    description:"Ui where you can new notes and see all of them"
-}
+
+
 
 export default function Todos() {
   const countStore: any = useCountStore();
